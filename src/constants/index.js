@@ -3,6 +3,7 @@ import project3 from "../assets/projects/weather app.jpg";
 import project5 from "../assets/projects/Contact_manage_01_compress.jpg";
 import project6 from "../assets/projects/Recipy_App_02.jpg";
 import project7 from "../assets/projects/Todo_app.jpg";
+import project1 from "../assets/projects/FindPG.png";
 
 export const HERO_CONTENT = `I am a passionate full-stack developer with expertise in building dynamic and responsive web applications. My experience includes working with front-end technologies like React.js as well as back-end frameworks like Node Js and Express Js. With a background in Computer Application, I bring an analytical mindset and problem-solving skills to software development, focusing on delivering high-quality, scalable solutions.`;
 
@@ -20,6 +21,14 @@ export const EXPERIENCES = [
 ];
 
 export const PROJECTS = [
+   {
+    title: "FindPG - A Full-Stack Web Application for PG Accommodation Management",
+    image: project1, // replace with your actual image import
+    description:
+      "FindPG is a full-stack web application designed to simplify the process of finding and managing Paying Guest (PG) accommodations. The platform connects users searching for PGs with property owners, providing a seamless experience for browsing, booking, and managing stays.",
+    technologies: ["React.js", "Node.js", "Express.js", "MongoDB", "Socket.IO"],
+    link: "https://findpg-woad.vercel.app/"
+  },
   {
     title: "Real-Time Collaborative Kanban App",
     image: project7, // replace with your actual image import
