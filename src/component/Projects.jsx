@@ -1,72 +1,81 @@
-import React from 'react';
-import { PROJECTS } from '../constants';
-import { motion } from "framer-motion"; // Import motion
+import { FiExternalLink } from "react-icons/fi";
+import { motion as Motion } from "motion/react";
+import { PROJECTS } from "../constants";
 
 const Projects = () => {
   return (
-    <div className='border-b border-neutral-900 pb-4'>
-      <motion.div
+    <section id="projects" className="border-t border-white/10 py-20">
+      <Motion.div
         whileInView={{ opacity: 1, y: 0 }}
-        initial={{ opacity: 0, y: -100 }}
+        initial={{ opacity: 0, y: 24 }}
+        viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.5 }}
+        className="mb-12 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"
       >
-        <h1 className='my-20 text-center text-4xl'>Projects</h1>
-      </motion.div>
-      <div>
+        <div>
+          <p className="mb-3 text-sm font-semibold uppercase text-amber-300">Selected work</p>
+          <h2 className="text-4xl font-semibold text-white sm:text-5xl">Projects with real product flows</h2>
+        </div>
+        <p className="max-w-md leading-7 text-neutral-400">
+          Full-stack apps focused on authentication, live updates, CRUD workflows, API integration, and responsive interfaces.
+        </p>
+      </Motion.div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
         {PROJECTS.map((project, index) => (
-          <div key={index} className="mb-8 flex flex-wrap lg:justify-center">
-
-            <motion.div
-              whileInView={{ opacity: 1, x: 0 }}
-              initial={{ opacity: 0, x: -100 }}
-              transition={{ duration: 1 }}
-              className="w-full lg:w-1/4"
+          <Motion.article
+            key={project.title}
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 28 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, delay: index * 0.06 }}
+            className="group overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] transition hover:border-emerald-300/35 hover:bg-white/[0.055]"
+          >
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${project.title}`}
+              className="block overflow-hidden border-b border-white/10 bg-neutral-950"
             >
-              {/* Wrap the image in an anchor tag for the link */}
-              <a
-                href={project.link || "#"} // Use project.link if available in constants, otherwise fallback to #
-                target="_blank" // Open link in a new tab
-                rel="noopener noreferrer" // Security best practice
-                className="inline-block transition-transform duration-300 hover:scale-110" // Add hover effect
-                aria-label={`Link to ${project.title} project`} // Accessibility
-              >
-                <img
-                  src={project.image}
-                  width={150} // Consider moving width/height styling to CSS/Tailwind if needed
-                  // height={150} // You might want consistent height too
-                  alt={project.title}
-                  className="mb-6 rounded" // Removed width/height from here if handled by parent/props
-                />
-              </a>
-            </motion.div>
+              <img
+                src={project.image}
+                alt={`${project.title} screenshot`}
+                className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+              />
+            </a>
 
-            <motion.div
-              whileInView={{ opacity: 1, x: 0 }}
-              initial={{ opacity: 0, x: 100 }}
-              transition={{ duration: 1 }}
-              className='w-full max-w-xl lg:w-3/4'
-            >
-              <h6 className="mb-2 font-semibold">{project.title}</h6>
-              <p className="mb-4 text-neutral-400">{project.description}</p>
-              {project.technologies.map((tech, index) => (
-                <span key={index} className='mr-2 mt-2 inline-block rounded bg-neutral-900 px-2 py-1 text-sm font-medium text-purple-900'>{tech}</span> // Added mt-2 and inline-block for better wrapping
-              ))}
-               {/* Optionally add a direct link here too if desired */}
-               {project.link && (
-                 <a
-                   href={project.link}
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   className="mt-4 inline-block text-blue-400 hover:underline"
-                 >
-                   View Project
-                 </a>
-               )}
-            </motion.div>
-          </div>
+            <div className="p-6">
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-semibold leading-7 text-white">{project.title}</h3>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${project.title}`}
+                  className="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 text-neutral-300 transition hover:border-emerald-300/60 hover:text-emerald-200"
+                >
+                  <FiExternalLink aria-hidden="true" />
+                </a>
+              </div>
+
+              <p className="mt-4 leading-7 text-neutral-400">{project.description}</p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full bg-neutral-950 px-3 py-1 text-sm font-medium text-amber-100 ring-1 ring-amber-300/15"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Motion.article>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

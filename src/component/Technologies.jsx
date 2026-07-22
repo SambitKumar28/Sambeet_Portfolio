@@ -1,167 +1,97 @@
-import React from 'react'
-import { RiReactjsLine } from 'react-icons/ri'
-import { TbBrandNextjs } from 'react-icons/tb'
-import { SiMongodb, SiTailwindcss, SiFlask, SiDjango, SiTypescript, SiPython, SiJavascript, SiGit, SiGithub, SiVuedotjs, SiExpress } from 'react-icons/si'
-import { FaNodeJs, FaAws } from 'react-icons/fa'
-import { BiLogoPostgresql } from 'react-icons/bi'
-import { animate, motion } from 'framer-motion'
+import { motion as Motion } from "motion/react";
+import { BiLogoPostgresql } from "react-icons/bi";
+import { FaAws, FaNodeJs } from "react-icons/fa";
+import { RiReactjsLine } from "react-icons/ri";
+import {
+  SiExpress,
+  SiGit,
+  SiGithub,
+  SiJavascript,
+  SiMongodb,
+  SiTailwindcss,
+} from "react-icons/si";
 
-const iconVariants = (duration) => ({
-  initial: { y: -10},
-  animate: {
-    y: [10, -10],
-    transition: {
-      duration: duration,
-      ease: "linear",
-      repeat: Infinity,
-      repeatType: "reverse"
-    }
-  }
-})
-
+const technologyGroups = [
+  {
+    title: "Languages",
+    items: [{ name: "JavaScript", icon: SiJavascript, color: "text-yellow-300" }],
+  },
+  {
+    title: "Frontend",
+    items: [
+      { name: "React", icon: RiReactjsLine, color: "text-cyan-300" },
+      { name: "Tailwind CSS", icon: SiTailwindcss, color: "text-sky-300" },
+    ],
+  },
+  {
+    title: "Backend",
+    items: [
+      { name: "Node.js", icon: FaNodeJs, color: "text-green-300" },
+      { name: "Express.js", icon: SiExpress, color: "text-neutral-100" },
+    ],
+  },
+  {
+    title: "Database",
+    items: [
+      { name: "MongoDB", icon: SiMongodb, color: "text-emerald-300" },
+      { name: "PostgreSQL", icon: BiLogoPostgresql, color: "text-blue-300" },
+    ],
+  },
+  {
+    title: "Tools",
+    items: [
+      { name: "Git", icon: SiGit, color: "text-orange-300" },
+      { name: "GitHub", icon: SiGithub, color: "text-neutral-100" },
+      { name: "AWS", icon: FaAws, color: "text-amber-300" },
+    ],
+  },
+];
 
 const Technologies = () => {
   return (
-    <div className="border-b border-neutral-800 pb-24">
-      <h2 className="my-20 text-center text-4xl">Technologies</h2>
+    <section id="skills" className="border-t border-white/10 py-20">
+      <Motion.div
+        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 24 }}
+        viewport={{ once: true, amount: 0.35 }}
+        transition={{ duration: 0.5 }}
+        className="mb-12"
+      >
+        <p className="mb-3 text-sm font-semibold uppercase text-emerald-300">Skills</p>
+        <h2 className="text-4xl font-semibold text-white sm:text-5xl">Technology stack</h2>
+      </Motion.div>
 
-      {/* Languages */}
-      <motion.div 
-      whileInView={{opasity: 1, x : 0}}
-      initial= {{opasity: 0, x : -100}}
-      transition={{duration: 2}}
-      className="mb-10">
-        <h3 className="text-2xl mb-6 text-center">Languages</h3>
-        <div className="flex justify-center gap-8">
-          <motion.div 
-          variants={iconVariants(2.5)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <SiJavascript className="text-7xl text-yellow-400" />
-          </motion.div>
-          
-        </div>
-      </motion.div>
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {technologyGroups.map((group, groupIndex) => (
+          <Motion.div
+            key={group.title}
+            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 24 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.45, delay: groupIndex * 0.05 }}
+            className="border-t border-white/10 pt-5"
+          >
+            <h3 className="mb-5 text-lg font-semibold text-white">{group.title}</h3>
+            <div className="grid grid-cols-2 gap-3">
+              {group.items.map((item) => {
+                const Icon = item.icon;
 
-      {/* Frontend */}
-      <motion.div 
-      whileInView={{opasity: 1, x : 0}}
-      initial= {{opasity: 0, x : 100}}
-      transition={{duration: 2}}
-      className="mb-10">
-        <h3 className="text-2xl mb-6 text-center">Frontend</h3>
-        <div className="flex justify-center gap-8 flex-wrap">
-          <motion.div 
-          variants={iconVariants(3)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <RiReactjsLine className="text-7xl text-cyan-400" />
-          </motion.div>
-          
-          <motion.div 
-          variants={iconVariants(2)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <SiTailwindcss className="text-7xl text-blue-400" />
-          </motion.div>
-          <motion.div 
-          variants={iconVariants(2)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <SiVuedotjs className="text-7xl text-green-400" />
-          </motion.div>
-        </div>
-      </motion.div>
+                return (
+                  <div
+                    key={item.name}
+                    className="flex min-h-24 flex-col items-center justify-center rounded-lg border border-white/10 bg-neutral-950/70 p-4 text-center transition hover:border-white/20"
+                  >
+                    <Icon className={`text-4xl ${item.color}`} aria-hidden="true" />
+                    <span className="mt-3 text-sm font-medium text-neutral-300">{item.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </Motion.div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
-      {/* Backend */}
-      <motion.div 
-      whileInView={{opasity: 1, x : 0}}
-      initial= {{opasity: 0, x : -100}}
-      transition={{duration: 2}}
-      className="mb-10">
-        <h3 className="text-2xl mb-6 text-center">Backend</h3>
-        <div className="flex justify-center gap-8">
-          <motion.div 
-          variants={iconVariants(2)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <FaNodeJs className="text-7xl text-green-400" />
-          </motion.div>
-          <motion.div 
-          variants={iconVariants(2.5)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <SiExpress className="text-7xl text-black-400" />
-          </motion.div>
-          
-        </div>
-      </motion.div>
-
-      {/* Database */}
-      <motion.div 
-      whileInView={{opasity: 1, x : 0}}
-      initial= {{opasity: 0, x : 100}}
-      transition={{duration: 2}}
-      className="mb-10">
-        <h3 className="text-2xl mb-6 text-center">Database</h3>
-        <motion.div className="flex justify-center gap-8">
-          <motion.div 
-          variants={iconVariants(2)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <SiMongodb className="text-7xl text-green-400" />
-          </motion.div>
-          <motion.div 
-          variants={iconVariants(2.5)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <BiLogoPostgresql className="text-7xl text-blue-400" />
-          </motion.div>
-        </motion.div>
-      </motion.div>
-
-      {/* Tools */}
-      <motion.div
-      whileInView={{opasity: 1, x : 0}}
-      initial= {{opasity: 0, x : -100}}
-      transition={{duration: 2}}>
-        <h3 className="text-2xl mb-6 text-center">Tools</h3>
-        <div 
-        
-        className="flex justify-center gap-8">
-          <motion.div 
-          variants={iconVariants(2)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <SiGit className="text-7xl text-orange-400" />
-          </motion.div>
-          <motion.div 
-          variants={iconVariants(2.5)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <SiGithub className="text-7xl text-black-400" />
-          </motion.div>
-          <motion.div 
-          variants={iconVariants(3)}
-          initial="initial"
-          animate="animate"
-          className="rounded-2xl border-4 border-neutral-800 p-4">
-              <FaAws className="text-7xl text-yellow-400" />
-          </motion.div>
-        </div>
-      </motion.div>
-    </div>
-  )
-}
-
-export default Technologies
+export default Technologies;
